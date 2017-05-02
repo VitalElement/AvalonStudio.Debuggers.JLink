@@ -148,7 +148,7 @@ var toolchainDownloads = new List<ToolchainDownloadInfo>
                 Format = "none", 
                 DestinationFile = "jlink.exe", 
                 // Note we need to manually upload the exe to a file host!
-                URL =  "https://1drv.ms/u/s!Avy6wigimZy_qq92nGhtysMAunUn8A",
+                URL =  "https://onedrive.live.com/download?cid=BF9C992228C2BAFC&resid=BF9C992228C2BAFC%21694262&authkey=AOtNzZBvyA7_QdY",
                 Name = "JLink_Windows",
                 PostExtract = (curDir, tc, info) =>{
                     Information(tc.ZipDir.CombineWithFilePath("jlink.exe"));
