@@ -1,0 +1,29 @@
+version: 0.2.0.{build}
+os: Visual Studio 2017
+install:  
+
+before_build:
+- cmd: git submodule update --init --recursive
+
+build_script:
+- ps: .\build.ps1
+
+test: off
+
+artifacts:
+- path: artifacts/nuget/*.nupkg
+
+deploy:
+- provider: Environment
+  name: FastRing
+  on:
+    branch: master
+    APPVEYOR_REPO_TAG: true
+
+notifications:
+- provider: Webhook
+  url: https://webhooks.gitter.im/e/e8ce2449e773a183903b
+  method: POST
+  on_build_success: true
+  on_build_failure: true
+  on_build_status_changed: true
