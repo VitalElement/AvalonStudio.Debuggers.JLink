@@ -290,7 +290,7 @@ Task("Publish-AppVeyorNuget")
         NuGetPush(settings, new NuGetPushSettings
         {
             Source = apiUrl,
-            ApiKey = apiUrl
+            ApiKey = apiKey
         });
     }
 });
