@@ -145,12 +145,12 @@ var toolchainDownloads = new List<ToolchainDownloadInfo>
         { 
             new ArchiveDownloadInfo()
             { 
-                Format = "exe", 
+                Format = "none", 
                 DestinationFile = "jlink.exe", 
                 URL =  "https://www.segger.com/downloads/jlink/JLink_Windows_V614e.exe",
                 Name = "JLink_Windows",
                 PostExtract = (curDir, info) =>{
-                    DeleteDirectory(curDir.Combine("$PLUGINSDIR"), true);
+                    StartProcess(curDir.CombineWithFilePath(jlink.exe), new ProcessSettings{ Arguments = string.Format("/S /NCRC /D={0}", curDir.ToString()));
                 }
             }
         }
@@ -236,6 +236,9 @@ Task("Extract-Toolchains")
             {
                 case "tar.bz2":
                 BZip2Uncompress(fileName, dest);
+                break;
+
+                case "none":
                 break;
 
                 case "zip":
