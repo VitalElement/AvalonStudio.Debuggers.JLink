@@ -145,14 +145,14 @@ var toolchainDownloads = new List<ToolchainDownloadInfo>
         { 
             new ArchiveDownloadInfo()
             { 
-                Format = "none", 
+                Format = "exe", 
                 DestinationFile = "jlink.exe", 
                 // Note we need to manually upload the exe to a file host!
                 URL =  "https://onedrive.live.com/download?cid=BF9C992228C2BAFC&resid=BF9C992228C2BAFC%21694262&authkey=AOtNzZBvyA7_QdY",
                 Name = "JLink_Windows",
                 PostExtract = (curDir, tc, info) =>{
-                    Information(tc.ZipDir.CombineWithFilePath("jlink.exe"));
-                    StartProcess(tc.ZipDir.CombineWithFilePath("jlink.exe"), new ProcessSettings{ Arguments = string.Format("/S /NCRC /D={0}", curDir.ToString())});
+                    DeleteDirectory(curDir.Combine("$PLUGINSDIR"), true);
+                    CopyFile("devices.csv", curDir.CombineWithFilePath("devices.csv"));
                 }
             }
         }
