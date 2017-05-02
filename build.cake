@@ -150,7 +150,7 @@ var toolchainDownloads = new List<ToolchainDownloadInfo>
                 URL =  "https://www.segger.com/downloads/jlink/JLink_Windows_V614e.exe",
                 Name = "JLink_Windows",
                 PostExtract = (curDir, info) =>{
-                    StartProcess(curDir.CombineWithFilePath(jlink.exe), new ProcessSettings{ Arguments = string.Format("/S /NCRC /D={0}", curDir.ToString()));
+                    StartProcess(curDir.CombineWithFilePath("jlink.exe"), new ProcessSettings{ Arguments = string.Format("/S /NCRC /D={0}", curDir.ToString())});
                 }
             }
         }
