@@ -114,7 +114,7 @@ public class ArchiveDownloadInfo
     public string Name {get;set;}
     public FilePath DestinationFile {get; set;}
     public string Format {get; set;}
-    public Action<DirectoryPath, ArchiveDownloadInfo> PostExtract {get; set;}
+    public Action<DirectoryPath, ToolchainDownloadInfo, ArchiveDownloadInfo> PostExtract {get; set;}
 }
 
 public class ToolchainDownloadInfo
@@ -147,10 +147,12 @@ var toolchainDownloads = new List<ToolchainDownloadInfo>
             { 
                 Format = "none", 
                 DestinationFile = "jlink.exe", 
-                URL =  "https://www.segger.com/downloads/jlink/JLink_Windows_V614e.exe",
+                // Note we need to manually upload the exe to a file host!
+                URL =  "https://1drv.ms/u/s!Avy6wigimZy_qq92nGhtysMAunUn8A",
                 Name = "JLink_Windows",
-                PostExtract = (curDir, info) =>{
-                    StartProcess(curDir.CombineWithFilePath("jlink.exe"), new ProcessSettings{ Arguments = string.Format("/S /NCRC /D={0}", curDir.ToString())});
+                PostExtract = (curDir, tc, info) =>{
+                    Information(tc.ZipDir.CombineWithFilePath("jlink.exe"));
+                    StartProcess(tc.ZipDir.CombineWithFilePath("jlink.exe"), new ProcessSettings{ Arguments = string.Format("/S /NCRC /D={0}", curDir.ToString())});
                 }
             }
         }
@@ -253,7 +255,7 @@ Task("Extract-Toolchains")
 
             if(downloadInfo.PostExtract != null)
             {
-                downloadInfo.PostExtract(dest, downloadInfo);
+                downloadInfo.PostExtract(dest, tc, downloadInfo);
             }
         }
     }
