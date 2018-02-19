@@ -60,7 +60,7 @@ var isTagged = BuildSystem.AppVeyor.Environment.Repository.Tag.IsTag
 // VERSION
 ///////////////////////////////////////////////////////////////////////////////
 
-var version = "0.2.0";
+var version = "6.3.0.4";
 
 ///////////////////////////////////////////////////////////////////////////////
 // DIRECTORIES
@@ -148,7 +148,7 @@ var toolchainDownloads = new List<ToolchainDownloadInfo>
                 Format = "exe", 
                 DestinationFile = "jlink.exe", 
                 // Note we need to manually upload the exe to a file host!
-                URL =  "https://onedrive.live.com/download?cid=BF9C992228C2BAFC&resid=BF9C992228C2BAFC%21694262&authkey=AOtNzZBvyA7_QdY",
+                URL =  "https://onedrive.live.com/download?cid=BF9C992228C2BAFC&resid=BF9C992228C2BAFC%21704830&authkey=AJZy-pFRMbiCGxk",
                 Name = "JLink_Windows",
                 PostExtract = (curDir, tc, info) =>{
                     DeleteDirectory(curDir.Combine("$PLUGINSDIR"), true);
@@ -176,7 +176,7 @@ public NuGetPackSettings GetPackSettings(string rid)
         Symbols = false,
         NoPackageAnalysis = true,
         Description = "JLink Debug Support for AvalonStudio",
-        Copyright = "Copyright 2017",
+        Copyright = "Copyright 2018",
         Tags = new [] { "JLink", "AvalonStudio", "Debug", "Adaptor" },
         Files = new []
         {
